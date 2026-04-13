@@ -8,5 +8,24 @@ metadata:
     component: frontend
 spec:
   volumes:
-    - emp
+    - name: shared
+      emptyDir: {}
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: /var/logs/
+          name: shared
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "150Mi"
+        limits:
+          cpu: "100m"
+          memory: "150Mi"
+  
+
+
+    
+        
   
