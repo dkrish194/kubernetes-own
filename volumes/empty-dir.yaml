@@ -23,6 +23,19 @@ spec:
         limits:
           cpu: "100m"
           memory: "150Mi"
+    - name: alphine
+      image: ubuntu
+      command: [ "sleep", "100000"]
+      volumeMounts:
+        - name: shared
+          mountPath: /var/log-alphine
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "150Mi"
+        limits:
+          cpu: "100m"
+          memory: "150Mi"
   
 
 
