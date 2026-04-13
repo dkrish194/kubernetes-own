@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-app
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: python-app
+spec:
+  volumes:
+    - name: config-vol
+      configMap:
+        name: python-app
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: Always
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "100Mi"
+        limits:
+          cpu: "200m"
+          
+        

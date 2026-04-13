@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  labels:
+    project : roboshop
+    component: python-app
+  namespace: roboshop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      project: roboshop
+      name: python-app
+      environment: dev
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        name: python-app
+        environment: dev
+    spec:
+      containers:
+        - name: python-app
+          image: dkrish194/python-app:1.0.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "200m"
+            limits:
+              memory: "100Mi"
+              cpu: "200m"
+          envFrom:
+            - configMapRef:
+                name: python-app
+            
+            
+
+  

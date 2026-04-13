@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-app
+  labels:
+    project: roboshop
+    name: python-app
+    environment: dev
+  namespace: roboshop
+spec:
+  containers:
+    - name: python-app
+      image: dkrish194/python-app:1.0.0
+      imagePullPolicy: Always
+      resources:
+        requests:
+          cpu: "200m"
+          memory: "100Mi"
+        limits:
+          cpu: "200m"
+          memory: "100Mi"
+      envFrom:
+        - configMapRef:
+          name: python-app
+            
+
+          
+          
+  

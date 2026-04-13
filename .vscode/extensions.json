@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "redhat.vscode-yaml",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "Tim-Koehler.helm-intellisense",
+    "eamodio.gitlens"
+  ],
+
+  "unwantedRecommendations": [
+    "redhat.ansible",
+    "hashicorp.terraform",
+    "ms-azuretools.vscode-docker"
+  ]
+}
