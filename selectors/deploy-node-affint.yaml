@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    project: roboshop
+    component: frontend
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      project: roboshop
+  template:
+    metadata:
+      labels:
+        project: roboshop
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: NotIn
+                    values:
+                      - k3d-devops-lab-agent-2
+                      - k3d-devops-lab-agent-1
+                      - k3d-devops-lab-server-0
+
+                  # - key: kubernetes.io/hostname
+                  #   operator: NotIn
+                  #   values: 
+                  #     - k3d-devops-lab-server-0
+      imagePullSecrets:
+        - name: dockerhub-secret
+      containers:
+        - name: nginx
+          image: nginx:1.29.8
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+      
