@@ -59,10 +59,10 @@ spec:
       - containerPort: 80
     volumeMounts:
       - mountPath: /etc/nginx/
-        name: nginx-ebs-static
+        name: ebs-static         # name of voume which you bind to pod
       
   volumes:
-    - name: ebs-static
+    - name: ebs-static            #  this name should give into voumemounts name
       persistentVolumeClaim:
         claimName: ebs-static
 
