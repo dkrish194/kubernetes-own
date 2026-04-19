@@ -14,7 +14,7 @@ spec:
     - ReadWriteOnce  
   csi:
     driver: csi.ebs.aws.com
-    volumeHandle:  xjgkdg
+    volumeHandle:  vol-01f9771fac9d25c59
     fsType: ext4
     
 ---
