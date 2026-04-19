@@ -45,6 +45,8 @@ metadata:
     teir: db
     component: nginx
 spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1b
   containers:
   - name: nginx
     image: nginx
