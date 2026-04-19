@@ -13,7 +13,7 @@ spec:
   accessModes:
     - ReadWriteOnce  
   csi:
-    driver: csi.ebs.aws.com
+    driver: ebs.csi.aws.com
     volumeHandle:  vol-01f9771fac9d25c59
     fsType: ext4
     
@@ -60,7 +60,7 @@ spec:
     ports:
       - containerPort: 80
     volumeMounts:
-      - mountPath: /etc/nginx/
+      - mountPath: /mnt/data
         name: ebs-static         # name of voume which you bind to pod
       
   volumes:
