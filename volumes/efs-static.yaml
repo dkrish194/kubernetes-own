@@ -69,7 +69,7 @@ spec:
           memory: "100Mi"
           cpu: "100m"
       volumeMounts:
-        - name: html-data
+        - name: efs-static
           mountPath: /mnt/data
         
 
