@@ -1,0 +1,49 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-dynamic
+  labels:
+    project: roboshop
+    teir: db
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic
+  labels:
+    project: roboshop
+    teir: db
+spec:
+  storageClassName: ebs-dynamic
+  accessModes:
+    - ReadWriteOnce
+  
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    project: roboshop
+    teir: db
+spec:
+  volumes:
+    - name: ebs-dynamic
+      persistentVolumeClaim:
+        claimName: ebs-dynamic
+  containers:
+    - name: nginx
+      image: nginx:1.29.8
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /mnt/data/
+          name: ebs-dynamic
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "100Mi"
+          cpu: "100m"
