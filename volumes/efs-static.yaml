@@ -21,7 +21,7 @@ spec:
     - ReadWriteOnce
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: xxxxxx
+    volumeHandle: fs-0a0e9d02632606d87
   persistentVolumeReclaimPolicy: Retain
     
 ---
