@@ -1,0 +1,61 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efs-dynamic
+  labels:
+    project: roboshop
+    teir: db
+    component: nginx
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0a0e9d02632606d87
+  directoryPerms: "700"
+  basePath: "/roboshop"
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic
+  labels:
+    project: roboshop
+    teir: db
+    component: nginx
+spec:
+  storageClassName: efs-dynamic
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-efs-dynamic
+  labels:
+    project: roboshop
+    teir: db
+    component: nginx
+spec:
+  volumes:
+    - name: efs-dynamic
+      persistentVolumeClaim:
+        claimName: efs-dynamic
+  containers:
+    - name: nginx
+      image: nginx:1.29.8
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "100Mi"
+          cpu: "100m"
+      volumeMounts:
+        - name: efs-dynamic
+          mountPath: /mnt/data
