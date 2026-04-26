@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    project: roboshop
+    teir: database
+    component: mongodb
+spec:
+  replicas: 6
+  selector:
+    matchlabels:
+      project: roboshop
+      teir: database
+      component: mongodb  
+    
+
+  template:
+    metadata:
+      project: roboshop
+      teir: database
+      component: mongodb
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: project
+                    operator: In
+                    values:
+                      - roboshop
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: pod
+          image: nginx:1.29.8
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
+                
+          
+            
+          
+        
+    
