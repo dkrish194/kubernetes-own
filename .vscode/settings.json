@@ -1,19 +1,26 @@
 {
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml"
+  },
+  "ansible.ansible.enabled": false,
+  "ansible.lightspeed.enabled": false,
+  "terraform.languageServer.enable": false,
+  "docker.enableDockerfileLanguageFeatures": false,
+  "yaml.validate": true,
+  "yaml.completion": true,
+  "vs-kubernetes.enable": true,
   "yaml.schemas": {
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
+      "docker-compose.yml",
+      "docker-compose.yaml",
+      "compose.yml",
+      "compose.yaml"
+    ],
     "kubernetes": [
       "**/*.yaml",
-      "manifests/**/*.yaml",
-      "helm/**/*.yaml"
+      "**/*.yml"
     ]
   },
-
-  "yaml.schemaStore.enable": true,
-  "yaml.schemaStore.url": "https://www.schemastore.org/api/json/catalog.json",
-
-  "yaml.validate": true,        
-  "yaml.completion": true,      
-  "yaml.hover": true,           
-
-  "yaml.format.enable": true,   
-  "yaml.editor.tabSize": 2      
+  "yaml.customTags": []
 }

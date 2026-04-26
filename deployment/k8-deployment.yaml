@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-app
+  name: python-app-tolaratoin
   labels:
-    project: ownshop
+    project: roboshop
     component: frontend
-  namespace: ownshop
+  namespace: roboshop
   annotations:
     kubernetes.io/change-cause: "gree-rel-3"
 spec:
   replicas: 3
   selector:
     matchLabels:
-      project: ownshop
+      project: roboshop
       component: frontend
   template:
     metadata:
       labels:
-        project: ownshop
+        project: roboshop
         component: frontend
     spec:
       containers:
@@ -42,13 +42,13 @@ kind: Service
 metadata:
   name: python-app
   labels:
-    project: ownshop
+    project: roboshop
     component: frontend
-  namespace: ownshop
+  namespace: roboshop
 spec:
   type: LoadBalancer
   selector:
-      project: ownshop
+      project: roboshop
       component: frontend
   ports:
     - port: 5000
@@ -58,4 +58,3 @@ spec:
 
 
 
-  
