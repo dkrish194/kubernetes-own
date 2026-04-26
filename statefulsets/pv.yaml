@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    project: roboshop
+    teir: db
+    compoenent: mongodb
+spec:
+  storageClassName: ""
+  capacity:
+    storage: "2Gi"
+  accessModes:
+    - "ReadWriteOnce"
+  hostPath:
+    path: /krishna
