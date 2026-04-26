@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    project: roboshop
+    teir: backend
+    component: catalogue
+data:
+  MONGO: "true"
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    project: roboshop
+    teir: backend
+    component: catalogue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      teir: backend
+      component: catalogue
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        teir: backend
+        component: catalogue
+    spec:
+      containers:
+        - name: catalogue
+          image: dkrish194/catalogue:2.0.0
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "200Mi"
+            limits:
+              cpu: "300"
+              memory: "300Mi"
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    project: roboshop
+    teir: backend
+    component: catalogue
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: catalogue
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: 
+          type: Utilization
+          averageUtilization: 50
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue
+  labels:
+    project: roboshop
+    teir: backend
+    component: catalogue
+  namespace: roboshop
+spec:
+  type: NodePort
+  selector:
+      project: roboshop
+      teir: backend
+      component: catalogue
+
+  ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 8080
