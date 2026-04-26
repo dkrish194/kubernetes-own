@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache
+  labels:
+    project: roboshop
+    component: frontend
+  namespace: roboshop
+  annotations:
+    kubernetes.io/change-cause: "gree-rel-3"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: roboshop
+      component: frontend
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        component: frontend
+    spec:
+      tolerations:
+        - key: env
+          operator: Equal
+          value: prod
+          effect: NoSchedule
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #             - key: kubernetes.io/hostname
+      #               operator: NotIn
+      #               values:
+      #                 - k3d-k3d-lab-cluster-agent-2-0-0
+
+      affinity:
+          podAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - backed
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: cache
+          image: nginx:1.29.8
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+
+
+
+
