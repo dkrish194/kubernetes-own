@@ -1,0 +1,32 @@
+{
+  "folders": [
+    { "path": ".." }
+  ],
+  "settings": {
+    "yaml.validate": true,
+    "yaml.schemas": {
+      "kubernetes": [
+        "**/*.yaml",
+        "**/*.yml"
+      ]
+    },
+    "files.watcherExclude": {
+      "**/.terraform/**": true,
+      "**/node_modules/**": true
+    },
+    "ansible.ansible.enabled": false,
+    "terraform.languageServer.enable": false,
+    "editor.formatOnSave": true
+  },
+  "extensions": {
+    "recommendations": [
+      "redhat.vscode-yaml",
+      "ms-kubernetes-tools.vscode-kubernetes-tools",
+      "Tim-Koehler.helm-intellisense"
+    ],
+    "unwantedRecommendations": [
+      "redhat.ansible",
+      "hashicorp.terraform"
+    ]
+  }
+}
