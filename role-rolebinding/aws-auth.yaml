@@ -6,7 +6,7 @@ data:
       - system:bootstrappers
       - system:nodes
       username: system:node:{{EC2PrivateDNSName}}
-  mapUser: |
+  mapUsers: |
     - userarn: arn:aws:iam::194893387098:user/roboshop-trainee-krishna
       username: roboshop-trianee-krishna
       groups:

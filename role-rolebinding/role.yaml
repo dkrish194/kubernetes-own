@@ -10,8 +10,8 @@ rules:
       - ""
     resources:
       - pods
-      - deployment
-      - service
+      - deployments
+      - services
     verbs:
       - get
       - watch

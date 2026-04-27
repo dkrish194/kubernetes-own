@@ -7,8 +7,8 @@ metadata:
     project: roboshop
 subjects:
   - kind: User
-    name: roboshop-trianee-krishna
+    name: roboshop-trainee-krishna
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: roboshop-trinee-podreader
+  name: roboshop-trainee-podreader
