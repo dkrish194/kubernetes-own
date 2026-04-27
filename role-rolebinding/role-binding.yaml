@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: roboshop-trainee-podreader
+  namespace: roboshop
+  labels:
+    project: roboshop
+subjects:
+  - kind: User
+    name: roboshop-trianee-krishna
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: roboshop-trinee-podreader
