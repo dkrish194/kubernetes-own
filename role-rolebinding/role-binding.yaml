@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: roboshop-trainee-podreader
-  namespace: roboshop
+  namespace: roboshAQQop
   labels:
     project: roboshop
 subjects:
